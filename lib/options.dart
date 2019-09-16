@@ -15,24 +15,32 @@ class Option {
   Option(this.name, this.icon, this.type);
 }
 
-class Options extends StatelessWidget {
+final List<Option> options = [
+  Option("New Timer", Icon(Icons.add_alarm), OptionType.NewTimer),
+  Option("Add Activity", Icon(Icons.add), OptionType.AddActivity),
+  Option("Settings", Icon(Icons.settings), OptionType.Settings),
+  Option("Done", Icon(Icons.check), OptionType.Done),
+];
+
+class Options extends StatefulWidget {
   Function(OptionType) _callback;
+  bool _visible;
 
-  final List<Option> options = [
-    Option("New Timer", Icon(Icons.add_alarm), OptionType.NewTimer),
-    Option("Add Activity", Icon(Icons.add), OptionType.AddActivity),
-    Option("Settings", Icon(Icons.settings), OptionType.Settings),
-    Option("Done", Icon(Icons.check), OptionType.Done),
-  ];
-
-  Options({@required Function(OptionType) callback}) {
+  Options({@required Function(OptionType) callback, @required bool visible}) {
     this._callback = callback;
+    this._visible = visible;
   }
 
   @override
+  _OptionsState createState() => _OptionsState();
+}
+
+class _OptionsState extends State<Options> {
+  @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: Duration(seconds: 1),
+    return AnimatedOpacity(
+      opacity: this.widget._visible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 120),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
@@ -42,7 +50,11 @@ class Options extends StatelessWidget {
               label: Text(item.name),
               icon: item.icon,
               clipBehavior: Clip.antiAlias,
-              onPressed: () => {this._callback(item.type)},
+              onPressed: () {
+                if (this.widget._visible) {
+                  this.widget._callback(item.type);
+                }
+              },
             ),
           ),
         ],

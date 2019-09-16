@@ -70,20 +70,3 @@ class EyeIris extends StatelessWidget {
     );
   }
 }
-
-class Eye extends StatelessWidget {
-  final double _size;
-
-  Eye(this._size);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: <Widget>[
-        EyeBase(_size),
-        EyeIris(_size * 0.2),
-      ],
-    );
-  }
-}

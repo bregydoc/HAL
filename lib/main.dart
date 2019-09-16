@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hal/eyebase.dart';
+import 'package:hal/eye.dart';
+
 import 'package:hal/mocks/activities.dart';
 import 'package:hal/options.dart';
+import 'package:hal/state/global.dart';
 
 import 'package:pigment/pigment.dart';
 
@@ -60,42 +62,57 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 100.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Eye(120.0),
-              ],
-            ),
-          ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(right: 18.0, bottom: 10.0),
-                child: Options(callback: (o) => print(o.toString())),
-              ),
-              Container(
-                height: 230.0,
-                width: MediaQuery.of(context).size.width,
-                child: ListView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 30.0,
-                    vertical: 20.0,
-                  ),
+              Padding(
+                padding: EdgeInsets.only(top: 100.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ...activities.map((f) => f.representation),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 16.0),
-                    ),
+                    Eye(120.0, () {
+                      GlobalState.onInteractCallback();
+                      this.setState(() {});
+                    }),
                   ],
                 ),
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    height: 230.0,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                        vertical: 20.0,
+                      ),
+                      children: <Widget>[
+                        ...activities.map((f) => f.representation),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 16.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ],
+          ),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 180),
+            right: GlobalState.interacting ? 0 : -20,
+            top: MediaQuery.of(context).size.height / 2 - 80.0,
+            child: Container(
+              padding: EdgeInsets.only(right: 18.0, bottom: 10.0),
+              child: Options(
+                callback: (o) => print(o.toString()),
+                visible: GlobalState.interacting,
+              ),
+            ),
           ),
         ],
       ),
