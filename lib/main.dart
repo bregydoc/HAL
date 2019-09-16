@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hal/eyebase.dart';
+import 'package:hal/mocks/activities.dart';
+import 'package:hal/options.dart';
+
+import 'package:pigment/pigment.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Project HAL',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -19,7 +25,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        // primarySwatch: new MaterialColor(, swatch),
+        primaryColor: Pigment.fromString("black"),
+        fontFamily: "FiraCode",
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -45,20 +53,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  _MyHomePageState() {
+    Timer.periodic(Duration(milliseconds: 500), (_) => this.setState(() => {}));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 100.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Eye(100.0),
+                Eye(120.0),
               ],
             ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(right: 18.0, bottom: 10.0),
+                child: Options(callback: (o) => print(o.toString())),
+              ),
+              Container(
+                height: 230.0,
+                width: MediaQuery.of(context).size.width,
+                child: ListView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 30.0,
+                    vertical: 20.0,
+                  ),
+                  children: <Widget>[
+                    ...activities.map((f) => f.representation),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 16.0),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

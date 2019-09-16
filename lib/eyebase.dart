@@ -13,11 +13,11 @@ class EyeBase extends StatelessWidget {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(_size * 0.7)),
-            color: _color,
+            borderRadius: BorderRadius.all(Radius.circular(_size)),
+            color: _color.withAlpha(52),
           ),
-          height: _size * 0.75,
-          width: _size * 0.75,
+          height: _size,
+          width: _size,
         ),
         Container(
           decoration: BoxDecoration(
@@ -29,11 +29,11 @@ class EyeBase extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(_size)),
-            color: _color.withAlpha(80),
+            borderRadius: BorderRadius.all(Radius.circular(_size * 0.7)),
+            color: _color,
           ),
-          height: _size,
-          width: _size,
+          height: _size * 0.75,
+          width: _size * 0.75,
         ),
       ],
     );
@@ -52,19 +52,19 @@ class EyeIris extends StatelessWidget {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(_size * 0.8)),
-            color: _color,
-          ),
-          height: _size * 0.7,
-          width: _size * 0.7,
-        ),
-        Container(
-          decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(_size)),
             color: _color.withAlpha(80),
           ),
           height: _size,
           width: _size,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(_size * 0.8)),
+            color: _color,
+          ),
+          height: _size * 0.7,
+          width: _size * 0.7,
         ),
       ],
     );
@@ -82,7 +82,7 @@ class Eye extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: <Widget>[
         EyeBase(_size),
-        EyeIris(_size*0.2),
+        EyeIris(_size * 0.2),
       ],
     );
   }
