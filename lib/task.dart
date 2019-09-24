@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hal/utils.dart';
 import 'package:pigment/pigment.dart';
 
 class TaskRepresentation extends StatelessWidget {
@@ -15,19 +16,8 @@ class TaskRepresentation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int days = _totalTime.inDays;
-    final int hours = (_totalTime.inHours - _totalTime.inDays * 24);
-    final int minutes = (_totalTime.inMinutes - _totalTime.inHours * 60);
-    final int seconds = (_totalTime.inSeconds - _totalTime.inMinutes * 60);
-
-    final String _finalDuration = days > 0
-        ? "${days}d ${hours}h ${minutes}m ${seconds}s"
-        : hours > 0
-            ? "${hours}h ${minutes}m ${seconds}s"
-            : minutes > 0
-                ? "${minutes}m ${seconds}s"
-                : seconds > 0 ? "${seconds}s" : "";
-
+    final String _finalDuration = Utils.duration2hal(_totalTime);
+    
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

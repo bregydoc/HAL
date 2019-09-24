@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hal/utils.dart';
+import 'package:pigment/pigment.dart';
 
 class ActivityTimer extends StatelessWidget {
   final String _name;
   final DateTime _endDate;
   ActivityTimer(this._name, this._endDate);
 
+  final Color _textWhiteColor = Pigment.fromString("white");
+  final Color _textDarkColor = Pigment.fromString("black");
+  final double _textWorkingOnSize = 14.0;
+  final double _textSize = 18.0;
+  final double _textDurationSize = 24.0;
+
   @override
   Widget build(BuildContext context) {
-    Duration dur = DateTime.now().difference(this._endDate);
-    final int days = dur.inDays;
-    final int hours = (dur.inHours - dur.inDays * 24);
-    final int minutes = (dur.inMinutes - dur.inHours * 60);
-    final int seconds = (dur.inSeconds - dur.inMinutes * 60);
-
-    final String _finalDuration = days > 0
-        ? "${days}d ${hours}h ${minutes}m ${seconds}s"
-        : hours > 0
-            ? "${hours}h ${minutes}m ${seconds}s"
-            : minutes > 0
-                ? "${minutes}m ${seconds}s"
-                : seconds > 0 ? "${seconds}s" : "";
+    Duration dur = this._endDate.difference(DateTime.now());
+    final String _finalDuration = Utils.duration2hal(dur);
 
     return Container(
       child: Column(
@@ -29,11 +26,23 @@ class ActivityTimer extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 2.0),
               color: Colors.white,
-              child: Text(_name),
+              child: Text(
+                _name,
+                style: TextStyle(
+                  color: _textDarkColor,
+                  fontSize: _textSize,
+                ),
+              ),
             ),
           ),
           Container(
-            child: Text(_finalDuration),
+            child: Text(
+              _finalDuration,
+              style: TextStyle(
+                color: _textWhiteColor,
+                fontSize: _textDurationSize,
+              ),
+            ),
           )
         ],
       ),

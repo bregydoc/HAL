@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "256472135759",
+    "firebase_url": "https://hal2000-7eb04.firebaseio.com",
+    "project_id": "hal2000-7eb04",
+    "storage_bucket": "hal2000-7eb04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256472135759:android:966c81da54d4984462d23a",
+        "android_client_info": {
+          "package_name": "com.paradigm.hal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256472135759-rh279ij4and1qb4bqpsmtupua9avrq24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiR3pH8045s4fV07wLR_QMS5dUHPPZL9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256472135759-rh279ij4and1qb4bqpsmtupua9avrq24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

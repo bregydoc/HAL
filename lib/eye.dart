@@ -40,13 +40,13 @@ class _EyeState extends State<Eye> {
   }
 
   void _calculateRandomBlink() {
-    currentDurationInMilliseconds = (rand.nextDouble() * 10).toInt() + 90;
+    currentDurationInMilliseconds = (rand.nextDouble() * 90).toInt() + 10;
     currentOpacity = rand.nextDouble();
     blinkInSeconds = (rand.nextDouble() * 10).toInt() + 2;
 
-    print("blinkInSeconds: $blinkInSeconds");
-    print("currentOpacity: $currentOpacity");
-    print("currentDurationInMilliseconds: $currentDurationInMilliseconds");
+    // print("blinkInSeconds: $blinkInSeconds");
+    // print("currentOpacity: $currentOpacity");
+    // print("currentDurationInMilliseconds: $currentDurationInMilliseconds");
 
     Timer(Duration(milliseconds: currentDurationInMilliseconds + 10), () {
       this.setState(() {
